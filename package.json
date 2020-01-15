@@ -1,0 +1,22 @@
+{
+  "name": "beabot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "airtable": "^0.8.1",
+    "axios": "^0.19.1",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "node-cron": "^2.0.3",
+    "nodemon": "^2.0.2",
+    "slackbots": "^1.2.0"
+  }
+}
