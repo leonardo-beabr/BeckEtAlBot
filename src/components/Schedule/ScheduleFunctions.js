@@ -8,7 +8,7 @@ module.exports = {
     EveryDayFunction(){
         console.log('EveryDayFunction')
         let date = new Date()
-        let startAt = `${date.getMonth() + 1 }/${date.getDate() - date.getDay() + 1}/${date.getFullYear()}`, endAt = "", counter = date.getDay();
+        let startAt = `${date.getMonth() + 1 }/${date.getDate() - date.getDay() + 1}/${date.getFullYear()}`, counter = date.getDay();
         cron.schedule("* * * * 1-5", () => {
             console.log(startAt)
             console.log("entrou na func")

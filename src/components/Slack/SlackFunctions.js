@@ -13,8 +13,10 @@ module.exports = {
             `Hoje quem entra em campo para cuidar da zeladoria é o ${users[0]['Name']} e o ${users[1]['Name']}`,
             `A escalação do Dream Team da Zeladoria é: `
         ]
+        const beaBrOfficeHook = "https://hooks.slack.com/services/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"
+        const leonardoSouzaHook = "https://hooks.slack.com/services/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"
         axios.post(
-            "https://hooks.slack.com/services/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",
+            leonardoSouzaHook,
             {
                 "blocks":[
                     {
@@ -24,36 +26,36 @@ module.exports = {
                             "text": `${ptMessage[0]} ${emojiList[randomEmoji]}`
                         }
                     },
-                    {
-                        "type": "section",
-                        "fields": [
-                            {
-                                "type": "plain_text",
-                                "text": "Trocar a sacola de lixo se estiver cheia;",
-                                "emoji": true
-                            },
-                            {
-                                "type": "plain_text",
-                                "text": "Colocar papéis higiênicos;",
-                                "emoji": true
-                            },
-                            {
-                                "type": "plain_text",
-                                "text": "Verificar a lava louças (retirar a louça limpa, ligar a máquina);",
-                                "emoji": true
-                            },
-                            {
-                                "type": "plain_text",
-                                "text": "Manter a cozinha organizada;",
-                                "emoji": true
-                            },
-                            {
-                                "type": "plain_text",
-                                "text": "Reabastecer as cápsulas de :coffee: e os pacotes de açucar;",
-                                "emoji": true
-                            }
-                        ]
-                    }
+                    // {
+                    //     "type": "section",
+                    //     "fields": [
+                    //         {
+                    //             "type": "plain_text",
+                    //             "text": "Trocar a sacola de lixo se estiver cheia;",
+                    //             "emoji": true
+                    //         },
+                    //         {
+                    //             "type": "plain_text",
+                    //             "text": "Colocar papéis higiênicos;",
+                    //             "emoji": true
+                    //         },
+                    //         {
+                    //             "type": "plain_text",
+                    //             "text": "Verificar a lava louças (retirar a louça limpa, ligar a máquina);",
+                    //             "emoji": true
+                    //         },
+                    //         {
+                    //             "type": "plain_text",
+                    //             "text": "Manter a cozinha organizada;",
+                    //             "emoji": true
+                    //         },
+                    //         {
+                    //             "type": "plain_text",
+                    //             "text": "Reabastecer as cápsulas de :coffee: e os pacotes de açucar;",
+                    //             "emoji": true
+                    //         }
+                    //     ]
+                    // }
                 ]
             }
         )
