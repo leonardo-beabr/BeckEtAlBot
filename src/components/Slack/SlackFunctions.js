@@ -2,7 +2,8 @@
 const axios = require('axios')
 
 module.exports = {
-    NotifyUser(users = Array){
+    NotifyUser(params = {'janitors' : Array, 'birthdays': Array}){
+        console.log(params)
         /*
             Maybe add a type param in the function to use it in more channels
             or with direct messages
@@ -13,14 +14,17 @@ module.exports = {
         let randomEmoji = Math.floor((Math.random() * 5) + 1);
         //Set a array of emojis http://emoji-cheat-sheet.com/
         const emojiList = [":sparkles:", ":boom:", ":muscle:", ":trophy:", ":rocket:", ":hotsprings:"]
-        const enMessage = `The janitors of this week are ${users[0]['Name']} and ${users[1]['Name']} from ${users[0]['Start']} to ${users[0]['End']}`
+        //const enMessage = `The janitors of this week are ${users[0]['Name']} and ${users[1]['Name']} from ${users[0]['Start']} to ${users[0]['End']}`
         //Array of messages that the App will send for the channel
-        const ptMessage = [
-            `Os zeladores desta semana são ${users[0]['Name']} e ${users[1]['Name']}`,
-            `O time da zeladoria nesta semana é composta por ${users[0]['Name']} e ${users[1]['Name']}`,
-            `Hoje quem entra em campo para cuidar da zeladoria é o ${users[0]['Name']} e o ${users[1]['Name']}`,
-            `A escalação do Dream Team da Zeladoria é: `
+        let ptMessage = [
+            `Os zeladores são ${params['janitors'][0]['Name']} e ${params['janitors'][1]['Name']}`,
+            //`O time da zeladoria nesta semana é composta por ${users[0]['Name']} e ${users[1]['Name']}`,
+            //`Hoje quem entra em campo para cuidar da zeladoria é o ${users[0]['Name']} e o ${users[1]['Name']}`,
+            //`A escalação do Dream Team da Zeladoria é: `
         ]
+        if(params['birthdays'].length != 0){
+            ptMessage[0] = ptMessage[0] + emojiList[randomEmoji] + ` e o aniversariante do dia é o :tada:${params['birthdays'][0]['Name']}:tada:`
+        }
         //For webhooks this variables is necessary
         const beaBrOfficeHook = "https://hooks.slack.com/services/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"
         const leonardoSouzaHook = "https://hooks.slack.com/services/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"
@@ -33,7 +37,7 @@ module.exports = {
                         "type": "section",
                         "text": {
                             "type": "mrkdwn",
-                            "text": `${ptMessage[0]} ${emojiList[randomEmoji]}`
+                            "text": `${ptMessage[0]}`
                         }
                     },
                     // {
