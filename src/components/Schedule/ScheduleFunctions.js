@@ -19,13 +19,13 @@ module.exports = {
             Airtable.ReadOfficeTable(startAt, currentDay).then(response => {
                 console.log(response)
                 //Then will Notify in a channel using the variable response
-                Slack.NotifyUser(response)
+                Slack.NotifyUser('everdayMessage', response)
                 counter++;
             })
             if(counter === 5){
                 //Set the start for the next Monday
                 //Need to use + 3
-                startAt = `${date.getMonth() + 1 }/${date.getDate() + 5}/${date.getFullYear()}`
+                startAt = `${date.getMonth() + 1 }/${date.getDate() + 3}/${date.getFullYear()}`
                 counter = 0
             }
         },{

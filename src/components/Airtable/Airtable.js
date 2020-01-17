@@ -1,15 +1,15 @@
 var Airtable = require('airtable');
-const apiKey = 'keyssmLoe5N3w0lrX' //ApiKey of my user
+require('dotenv').config()
 Airtable.configure({
     endpointUrl: 'https://api.airtable.com',
-    apiKey: apiKey
+    apiKey: process.env.API_KEY_AIRTABLE
 });
 
 module.exports = {
     ReadOfficeTable(dayStart, currentDay){
         console.log(dayStart, currentDay)
         var storeResponse = {'janitors': [], 'birthdays': []}
-        var base = Airtable.base('appgX5C9CkrmsFRml'); //ID of the base
+        var base = Airtable.base(process.env.AIRTABLE_BASE); //ID of the base
         const bases = ['Office Duties', 'Birthday']
         //Async function that returns a array
         return new Promise(async function(resolve, reject){
