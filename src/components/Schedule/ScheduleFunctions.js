@@ -9,24 +9,43 @@ module.exports = {
         console.log('EveryDayFunction')
         const date = new Date()
         //Get the day of the Monday of the week
-        let startAt = `${date.getMonth() + 1 }/${date.getDate() - date.getDay() + 1}/${date.getFullYear()}`;
+        let startAt = `${date.getMonth() + 1 }/${date.getDate() - date.getDay() + 1}/${date.getFullYear()}`; //Will get the Monday
+        let endAt = `${date.getMonth() + 1 }/${date.getDate() - date.getDay() + 5}/${date.getFullYear()}` //Will get the Friday
         let counter = date.getDay();
+        console.log(endAt)
         cron.schedule("* * * * 1-5", () => {
             console.log('Schedule Working')
+            let users;
             //This will set a value between 0 and 6 (Sun-Sat)
-            let currentDay = `${date.getMonth() + 1 }/${date.getDate()}/${date.getFullYear()}`;
+            let currentDay = '1/24/2020' // `${date.getMonth() + 1 }/${date.getDate()}/${date.getFullYear()}`;
             //Will execute the function passing the value of the Monday of the current week
-            Airtable.ReadOfficeTable(startAt, currentDay).then(response => {
+            Airtable.ReadOfficeTable(startAt, currentDay, endAt) //test use currentDay
+            .then(response => {
                 console.log(response)
                 //Then will Notify in a channel using the variable response
-                Slack.NotifyUser('everdayMessage', response)
+                users = response['janitors']
                 counter++;
+                if(response['nextJanitors'].length !== 0){
+                    const newDate = new Date()
+                    users = response['nextJanitors'];
+                    Airtable.ChangeJanitorsDate({
+                        'start': `${newDate.getMonth() + 1 }/${newDate.getDate() - newDate.getDay() + 1}/${newDate.getFullYear()}`, 
+                        'end': `${newDate.getMonth() + 1 }/${newDate.getDate() - newDate.getDay() + 5}/${newDate.getFullYear()}`
+                    }, response['nextJanitors'])
+                }
+                Slack.EverydayNotify({'janitors': users,'birthdays':response['birthdays']})
+            })
+            .catch(error =>{
+                Slack.ErrorNotify(error)
+                if(error === 'no users found'){
+                }
             })
             if(counter === 5){
                 //Set the start for the next Monday
                 //Need to use + 3
-                startAt = `${date.getMonth() + 1 }/${date.getDate() + 3}/${date.getFullYear()}`
-                counter = 0
+                startAt = `${date.getMonth() + 1 }/${date.getDate() + 3}/${date.getFullYear()}`//Vai pegar o valor da próxima segunda feira
+                counter = 0;
+                // Airtable.ChangeJanitorsDate(users)
             }
         },{
             scheduled: true,
