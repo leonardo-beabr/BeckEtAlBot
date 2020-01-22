@@ -8,7 +8,6 @@ const base = Airtable.base(process.env.AIRTABLE_BASE); //ID of the base
 const bases = ['Office Duties', 'Birthday', 'Users Id', 'Date Backup']
 module.exports = {
     ReadOfficeTable(dayStart, currentDay, dayEnd){
-        console.log(dayStart, currentDay)
         var storeResponse = {'janitors': [], 'birthdays': [], 'nextJanitors': [], 'storeJanitors':[]}
         //Async function that returns a array
         return new Promise(async function(resolve, reject){
@@ -37,7 +36,7 @@ module.exports = {
                                 if(storeResponse['storeJanitors'].length < 2){//Will get the first two records of the base
                                     storeResponse['storeJanitors'].push({...record.fields, 'id': record.id}) //Será usada para coletar os dois primeiros nomes 
                                 }
-                                if(record.get('Start') === undefined || (ableStore === 2 && record.get('End') !== dayEnd)){
+                                if((record.get('Start') === undefined && dayEnd === currentDay) || (ableStore === 2 && record.get('End') !== dayEnd)){
                                     //This will store the first two itens of the base wich is undefined or its a old base that need to be updated
                                     storeResponse['nextJanitors'].push({...record.fields, 'id': record.id});
                                 }
@@ -50,7 +49,6 @@ module.exports = {
                             }
                         }
                     });
-                    console.log('Finished')
                     counter++;
                     // To fetch the next page of records, call `fetchNextPage`.
                     // If there are more records, `page` will get called again.
@@ -58,19 +56,22 @@ module.exports = {
                     fetchNextPage();
                 
                 }, function done(err) {
-                    console.log('entrou no done')
                     if (err) { console.error(err); reject(err);return; }
                     console.log(counter, bases.length)
                     if(counter === bases.length){
-                        console.log("Done")
-                        if(storeResponse['nextJanitors'].length === 0){
+                        if(storeResponse['nextJanitors'].length === 0){//will check if have any item in the array.
+                            if(currentDay === dayEnd){//if the current day is the same of dayEnd the variable will set the value of the first two itens of the base
+                                storeResponse['nextJanitors'] = storeResponse['storeJanitors']
+                            }
+                            else{
+                                delete storeResponse['nextJanitors']//if dont will delete this item of the response
+                            }
+                        }
+                        if(storeResponse['janitors'].length === 0 && storeResponse['storeJanitors'].length !== 0){
+                            //will check the value of the janitors and the length of the storeJanitors
                             storeResponse['nextJanitors'] = storeResponse['storeJanitors']
-                            delete storeResponse['storeJanitors']
                         }
-                        if(storeResponse['janitors'].length !== 0){
-                            delete storeResponse['storeJanitors']
-                            // delete storeResponse['nextJanitors']
-                        }
+                        delete storeResponse['storeJanitors']
                         resolve(storeResponse)
                     }
                 })
@@ -79,7 +80,6 @@ module.exports = {
     },
     ChangeJanitorsDate(dates = {'start': String, 'end': String}, users = Array){
         console.log('ChangeJanitorsDate')
-        console.log(users)
         let updateUsers = [];
         for(let i = 0; i < 2; i++){
             updateUsers.push({
@@ -91,6 +91,7 @@ module.exports = {
             updateUsers[i]['fields']['Work'] = 'false'
             delete updateUsers[i]['fields']['id']
         }
+        // console.log(updateUsers)
         base(bases[3]).update(updateUsers, function(err, records){
             if(err){console.log(err);return;}
         })

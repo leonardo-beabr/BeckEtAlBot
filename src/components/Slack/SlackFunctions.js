@@ -42,7 +42,7 @@ module.exports = {
         //const enMessage = `The janitors of this week are ${users[0]['Name']} and ${users[1]['Name']} from ${users[0]['Start']} to ${users[0]['End']}`
         //Array of messages that the App will send for the channel
         let ptMessage = [
-            `Os zeladores são <@${params['janitors'][0]['Slack Id']}> e <@${params['janitors'][1]['Slack Id']}>`//,
+            `Os zeladores são <@${params['janitors'][0]['Slack Id']}> e <@${params['janitors'][1]['Name']}>`//,
             //`O time da zeladoria nesta semana é composta por ${users[0]['Name']} e ${users[1]['Name']}`,
             //`Hoje quem entra em campo para cuidar da zeladoria é o ${users[0]['Name']} e o ${users[1]['Name']}`,
             //`A escalação do Dream Team da Zeladoria é: `
@@ -53,11 +53,12 @@ module.exports = {
         if(params['birthdays'].length < 1){
 
         }
-        bot.postMessage('DSH3K8AF3', ptMessage[0], slackParams);
+        console.log(ptMessage[0])
+        // bot.postMessage('DSH3K8AF3', ptMessage[0], slackParams);
         //bot.postMessage(process.env.CHANNEL, ptMessage[0], slackParams)
     },
     ErrorNotify(error){
         console.log(error)
-        bot.postMessage('DSH3K8AF3', error, slackParams);
+        // bot.postMessage('DSH3K8AF3', error, slackParams);
     }
 }
