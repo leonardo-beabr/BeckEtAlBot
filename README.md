@@ -1,15 +1,18 @@
-<h1>Beck Et Al Brazilian Bot</h1>
+<h1>Beck Et Al Brazilian Bot :robot_face:</h1>
 
 <h3>Ready</h3>
 <ul>
     <li>Send messages in a slack channel with webhook (app only)</li>
     <li>Send messages in a slack channel as an Bot</li>
+    <li>Generate new janitors date</li>
+    <li>Scheduled functions for specific days and times of day</li>
 </ul>
 
 <h3>Todo</h3>
 <ul>
     <li>Add interactions</li>
     <li>Add a NLP provier (Assisant, Power Agents, Dialogflow)</li>
+    <li>Remove, add and change users of a base</li>
 </ul>
 
 <h3>Setting up</h3>
@@ -37,3 +40,17 @@
     <li>In thei project we used the Office Duties and Birthday tables (see in Airtable.js file)</li>
     <li>Check the sample of the base <a href="https://airtable.com/invite/l?inviteId=invSBH17Cr8bRJifH&inviteToken=30b3e74bb212cd8c6f4245549c0928167758ca01f32b55769fdc0d275154e45d" target="_blank">here</a>;</li>
 </ul>
+
+<h3>Scripts</h3>
+
+<p>Run with nodemon</p>
+
+```
+yarn dev
+```
+
+<p>Run in production</p>
+
+```
+yarn start
+```
