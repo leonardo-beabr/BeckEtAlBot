@@ -1,4 +1,4 @@
-<h1>Beck Et Al Brazilian Bot :robot_face:</h1>
+<h1>Beck Et Al Brazilian Bot</h1>
 
 <h3>Ready</h3>
 <ul>
