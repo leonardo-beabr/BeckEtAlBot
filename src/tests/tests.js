@@ -1,3 +1,5 @@
+//Method to set a random message
+/*
 let janitorPhrases = {
     'portuguese': [0, 4, 6],
     'english': [1, 2, 3],
@@ -25,3 +27,10 @@ function RandomPhrase(janitor, birthday){
     // console.log()
 }
 RandomPhrase(janitorPhrases, birthdaysPhrases)
+*/
+//Method to set next monday and next friday
+// const date = new Date(2020, 2, 28)
+// const startAt = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay() + 8)
+// const endAt = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay() + 12)
+// console.log('startAt: ', `${startAt.getMonth() + 1 }/${startAt.getDate()}/${startAt.getFullYear()}`)
+// console.log('endAt: ', `${endAt.getMonth() + 1 }/${endAt.getDate()}/${endAt.getFullYear()}`)

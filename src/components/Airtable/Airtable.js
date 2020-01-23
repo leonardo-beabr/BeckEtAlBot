@@ -59,6 +59,7 @@ module.exports = {
                     if (err) { console.error(err); reject(err);return; }
                     console.log(counter, bases.length)
                     if(counter === bases.length){
+                        // console.log(storeResponse)
                         if(storeResponse['nextJanitors'].length === 0){//will check if have any item in the array.
                             if(currentDay === dayEnd){//if the current day is the same of dayEnd the variable will set the value of the first two itens of the base
                                 storeResponse['nextJanitors'] = storeResponse['storeJanitors']
@@ -66,6 +67,9 @@ module.exports = {
                             else{
                                 delete storeResponse['nextJanitors']//if dont will delete this item of the response
                             }
+                        }
+                        else if(storeResponse['nextJanitors'].length === 1 && storeResponse['janitors'].length === 2){
+                            storeResponse['nextJanitors'].push(storeResponse['janitors'][0])
                         }
                         if(storeResponse['janitors'].length === 0 && storeResponse['storeJanitors'].length !== 0){
                             //will check the value of the janitors and the length of the storeJanitors
@@ -88,12 +92,15 @@ module.exports = {
             })
             updateUsers[i]['fields']['Start'] = dates['start']
             updateUsers[i]['fields']['End'] = dates['end']
-            updateUsers[i]['fields']['Work'] = 'false'
             delete updateUsers[i]['fields']['id']
         }
         // console.log(updateUsers)
-        base(bases[3]).update(updateUsers, function(err, records){
-            if(err){console.log(err);return;}
+        return new Promise(function(resolve, reject){
+            base(bases[3]).update(updateUsers, function(err, records){
+                if(err){
+                    reject(err)
+                }
+            })
         })
     }
 }

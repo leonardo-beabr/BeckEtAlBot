@@ -12,12 +12,12 @@ module.exports = {
             const date = new Date()
             // const checkLastDayOfMonth = new Date(date.getFullYear(), date.getMonth()+1, 0)
             //Get the day of the Monday of the week
-            let startAt = `${date.getMonth() + 1 }/${date.getDate() - date.getDay() + 1}/${date.getFullYear()}`; //Will get the Monday
-            let endAt = `${date.getMonth() + 1 }/${date.getDate() - date.getDay() + 5}/${date.getFullYear()}` //Will get the Friday
+            let startAt = new Date(`${date.getMonth() + 1 }/${date.getDate() - date.getDay() + 1}/${date.getFullYear()}`); //Will get the Monday
+            let endAt = new Date(`${date.getMonth() + 1 }/${date.getDate() - date.getDay() + 5}/${date.getFullYear()}`) //Will get the Friday
             let users; //will store the janitors of the week
             let currentDay = `${date.getMonth() + 1 }/${date.getDate()}/${date.getFullYear()}`;
             //Will execute the function passing the value of the Monday of the current week
-            Airtable.ReadOfficeTable(startAt, currentDay, endAt) //test use currentDay
+            Airtable.ReadOfficeTable(`${startAt.getMonth() + 1 }/${startAt.getDate()}/${startAt.getFullYear()}`, currentDay, `${endAt.getMonth() + 1 }/${endAt.getDate()}/${endAt.getFullYear()}`) //test use currentDay
             .then(response => {
                 //Then will Notify in a channel using the variable response
                 console.log(response)
@@ -27,12 +27,17 @@ module.exports = {
                     if(response['janitors'].length === 0){
                         users = response['nextJanitors']
                     }
-                    startAt = new Date(date.getFullYear(), date.getMonth(), date.getDate()+3)
-                    endAt = new Date(date.getFullYear(), date.getMonth(), date.getDate()+7)
+                    else{
+                        startAt = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay() + 8) //Will get the next Monday
+                        endAt = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay() + 12)// will get the next friday
+                    }
                     Airtable.ChangeJanitorsDate({
                         'start': `${startAt.getMonth() + 1 }/${startAt.getDate()}/${startAt.getFullYear()}`, 
                         'end': `${endAt.getMonth() + 1 }/${endAt.getDate()}/${endAt.getFullYear()}`
                     }, response['nextJanitors'])
+                    .catch(error => {
+                        Slack.ErrorNotify(error)
+                    })
                 }
                 Slack.EverydayNotify({'janitors': users,'birthdays':response['birthdays']})
             })
