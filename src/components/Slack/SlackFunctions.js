@@ -30,19 +30,20 @@ module.exports = {
     EverydayNotify(params = {'janitors' : Array, 'birthdays': Array}){
         console.log(params)
         let currentJanitorPhrase = '', currentBirthdayPhrase = ''
+        //Phrases that can be used
         let janitorPhrases = {
-            'portuguese': [`Os zeladores são ${params['janitors'][0]['Name']} e ${params['janitors'][1]['Name']}`],
+            'portuguese': [],
             'english': [],
             'spanish': [],
             'german': []
         }
         let birthdaysPhrases = {
-            'portuguese': [`Os zeladores são ${params['janitors'][0]['Name']} e ${params['janitors'][1]['Name']}`],
+            'portuguese': [],
             'english': [],
             'spanish': [],
             'german': []
         }
-        function RandomPhrase(janitor, birthday){
+        function RandomPhrase(janitor, birthday){//Function to set an aleatory phrase
             const randomLanguage = Object.keys(janitor)[Math.floor(Math.random() * Object.keys(janitor).length)] 
             currentJanitorPhrase = janitor[randomLanguage][Math.floor(Math.random() * janitor[randomLanguage].length)]
             if(params['birthdays'].length !== 0){
