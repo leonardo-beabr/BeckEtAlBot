@@ -28,7 +28,7 @@ module.exports = {
         To mention an user => <@User_Id>
     */
     EverydayNotify(params = {'janitors' : Array, 'birthdays': Array}){
-        console.log(params)
+        // console.log(params)
         let currentJanitorPhrase = '', currentBirthdayPhrase = ''
         //Phrases that can be used
         let janitorPhrases = {
@@ -79,10 +79,10 @@ module.exports = {
         }
         console.log(ptMessage[0])
         // bot.postMessage('DSH3K8AF3', ptMessage[0], slackParams);
-        //bot.postMessage(process.env.CHANNEL, ptMessage[0], slackParams)
+        // bot.postMessage(process.env.CHANNEL, ptMessage[0], slackParams)
     },
     ErrorNotify(error){
         console.log(error)
-        // bot.postMessage('DSH3K8AF3', error, slackParams);
+        bot.postMessage('DSH3K8AF3', `Error: ${error}`, slackParams);
     }
 }

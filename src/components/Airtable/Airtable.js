@@ -21,7 +21,7 @@ module.exports = {
                 }).eachPage(function page(records, fetchNextPage){
                     // This function (`page`) will get called for each page of records.
                     records.forEach(function(record) {
-                        if(currentBase === 'Date Backup'){
+                        if(currentBase === 'Office Duties'){
                             if(record.get('Start') === dayStart){
                                 //compare if the value Start if the same of the variable dayStart
                                 storeResponse['janitors'].push({...record.fields, 'id': record.id})//add to the array the object
@@ -57,7 +57,7 @@ module.exports = {
                 
                 }, function done(err) {
                     if (err) { console.error(err); reject(err);return; }
-                    console.log(counter, bases.length)
+                    // console.log(counter, bases.length)
                     if(counter === bases.length){
                         // console.log(storeResponse)
                         if(storeResponse['nextJanitors'].length === 0){//will check if have any item in the array.
@@ -83,7 +83,6 @@ module.exports = {
         })
     },
     ChangeJanitorsDate(dates = {'start': String, 'end': String}, users = Array){
-        console.log('ChangeJanitorsDate')
         let updateUsers = [];
         for(let i = 0; i < 2; i++){
             updateUsers.push({
@@ -94,9 +93,8 @@ module.exports = {
             updateUsers[i]['fields']['End'] = dates['end']
             delete updateUsers[i]['fields']['id']
         }
-        // console.log(updateUsers)
         return new Promise(function(resolve, reject){
-            base(bases[3]).update(updateUsers, function(err, records){
+            base(bases[0]).update(updateUsers, function(err, records){
                 if(err){
                     reject(err)
                 }
