@@ -8,7 +8,7 @@ module.exports = {
     EveryDayFunction(){
         // var date = new Date();
         console.log('EveryDayFunction')
-        cron.schedule("* * * * 1-5", () => {
+        cron.schedule("* * * * 1-5", () => { //Maybe this condition will be used
             const date = new Date()
             // const checkLastDayOfMonth = new Date(date.getFullYear(), date.getMonth()+1, 0)
             //Get the day of the Monday of the week
@@ -20,14 +20,14 @@ module.exports = {
             Airtable.ReadOfficeTable(`${startAt.getMonth() + 1 }/${startAt.getDate()}/${startAt.getFullYear()}`, currentDay, `${endAt.getMonth() + 1 }/${endAt.getDate()}/${endAt.getFullYear()}`) //test use currentDay
             .then(response => {
                 //Then will Notify in a channel using the variable response
-                console.log(response)
+                // console.log(response)
                 users = response['janitors']
                 // counter++;
                 if(response['nextJanitors']){
                     if(response['janitors'].length === 0){
                         users = response['nextJanitors']
                     }
-                    else{
+                    if(response['janitors'].length !== 0){
                         startAt = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay() + 8) //Will get the next Monday
                         endAt = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay() + 12)// will get the next friday
                     }
@@ -46,14 +46,6 @@ module.exports = {
                 if(error === 'no users found'){
                 }
             })
-            //Its was removed bacause at the moment wasnt necessary to use
-            // if(date.getDay() === 5){
-            //     //Set the start for the next Monday
-            //     //Need to use + 3
-            //     startAt = `${date.getMonth() + 1 }/${date.getDate() + 3}/${date.getFullYear()}`//Vai pegar o valor da próxima segunda feira
-            //     counter = 1;
-            //     // Airtable.ChangeJanitorsDate(users)
-            // }
         },{
             scheduled: true,
             timezone: "America/Sao_Paulo" //Uses a custom time zone

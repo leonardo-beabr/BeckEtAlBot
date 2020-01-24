@@ -34,3 +34,13 @@ RandomPhrase(janitorPhrases, birthdaysPhrases)
 // const endAt = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay() + 12)
 // console.log('startAt: ', `${startAt.getMonth() + 1 }/${startAt.getDate()}/${startAt.getFullYear()}`)
 // console.log('endAt: ', `${endAt.getMonth() + 1 }/${endAt.getDate()}/${endAt.getFullYear()}`)
+
+//NLP Luis Method
+// const axios = require('axios')
+// const phrase = 'Ola'
+// axios.get(
+//     `https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/697902f5-988f-4a84-9bdf-f7973b60ee30?staging=true&verbose=true&timezoneOffset=-360&subscription-key=9cfd01b04e9c4bfba103ab396ec32211&q=${phrase}`
+//     )
+// .then(function(response){
+//     console.log(response.data)
+// })
