@@ -4,16 +4,14 @@ const Airtable = require('../Airtable/Airtable');
 const Slack = require('../Slack/SlackFunctions')
 
 module.exports = {
-    //This function will be executed every day at 8:00 AM from Monday to Friday
+    //This function will be executed every day at 8:00 AM at Mondays and Thursdays
     EveryDayFunction(){
-        // var date = new Date();
         console.log('EveryDayFunction')
-        cron.schedule("* * * * 1-5", () => { //Maybe this condition will be used
+        cron.schedule("* * * * 1,4", () => { //Maybe this condition will be used "10 8 * * 1,4"
             const date = new Date()
-            // const checkLastDayOfMonth = new Date(date.getFullYear(), date.getMonth()+1, 0)
             //Get the day of the Monday of the week
             let startAt = new Date(`${date.getMonth() + 1 }/${date.getDate() - date.getDay() + 1}/${date.getFullYear()}`); //Will get the Monday
-            let endAt = new Date(`${date.getMonth() + 1 }/${date.getDate() - date.getDay() + 5}/${date.getFullYear()}`) //Will get the Friday
+            let endAt = new Date(`${date.getMonth() + 1 }/${date.getDate() - date.getDay() + 4}/${date.getFullYear()}`) //Will get the Thursday
             let users; //will store the janitors of the week
             let currentDay = `${date.getMonth() + 1 }/${date.getDate()}/${date.getFullYear()}`;
             //Will execute the function passing the value of the Monday of the current week
@@ -29,7 +27,7 @@ module.exports = {
                     }
                     if(response['janitors'].length !== 0){
                         startAt = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay() + 8) //Will get the next Monday
-                        endAt = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay() + 12)// will get the next friday
+                        endAt = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay() + 11)// will get the next friday
                     }
                     Airtable.ChangeJanitorsDate({
                         'start': `${startAt.getMonth() + 1 }/${startAt.getDate()}/${startAt.getFullYear()}`, 
