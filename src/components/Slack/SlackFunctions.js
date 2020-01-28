@@ -79,7 +79,7 @@ module.exports = {
         }
         console.log(ptMessage[0])
         // bot.postMessage('DSH3K8AF3', ptMessage[0], slackParams);
-        // bot.postMessage(process.env.CHANNEL, ptMessage[0], slackParams)
+        bot.postMessage(process.env.CHANNEL, ptMessage[0], slackParams)
     },
     ErrorNotify(error){
         console.log(error)
