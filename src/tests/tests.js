@@ -44,3 +44,15 @@ RandomPhrase(janitorPhrases, birthdaysPhrases)
 // .then(function(response){
 //     console.log(response.data)
 // })
+
+//Random method to sort a message
+// let message = ''
+// const janitor1 = 'Leo', janitor2 = 'Oel'
+// const emojiList = [":sparkles:", ":boom:", ":muscle:", ":trophy:", ":rocket:", ":hotsprings:"]
+// const phrases = [
+//     `Bom dia! Hoje ${janitor1} e ${janitor2} estarão auxiliando na organização do nosso ambiente de trabalho`,
+//     `Bahhhh gurizada, hoje os Zelas são os ${janitor1} ${janitor2} dos meu. Eles que vão dar uma girica na cozinha neh!`,
+//     `E ai camaradinhas, os zeladores de hoje são ${janitor1} e ${janitor2}. Vamo dalhe!`
+// ]
+// message = `${emojiList[Math.floor((Math.random()* emojiList.length))]} ${phrases[Math.floor((Math.random()* phrases.length))]} ${emojiList[Math.floor((Math.random()* emojiList.length))]}`
+// console.log(message)
