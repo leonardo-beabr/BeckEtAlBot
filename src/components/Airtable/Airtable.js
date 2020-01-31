@@ -8,7 +8,7 @@ const base = Airtable.base(process.env.AIRTABLE_BASE); //ID of the base
 const bases = ['Office Duties', 'Birthday', 'Users Id', 'Date Backup']
 module.exports = {
     ReadOfficeTable(dayStart, currentDay, dayEnd){
-        var storeResponse = {'janitors': [], 'birthdays': [], 'nextJanitors': [], 'storeJanitors':[]}
+        var storeResponse = {'janitors': [], 'birthdays': [], 'nextJanitors': [], 'storeJanitors':[], 'phrase' : ``}
         //Async function that returns a array
         return new Promise(async function(resolve, reject){
             let counter = 0, ableStore = 0;
@@ -59,6 +59,7 @@ module.exports = {
                     if (err) { console.error(err); reject(err);return; }
                     // console.log(counter, bases.length)
                     if(counter === bases.length){
+                        let janitor1 = '', janitor2 = '' //will set the two janitors
                         // console.log(storeResponse)
                         if(storeResponse['nextJanitors'].length === 0){//will check if have any item in the array.
                             if(currentDay === dayEnd){//if the current day is the same of dayEnd the variable will set the value of the first two itens of the base
@@ -70,11 +71,61 @@ module.exports = {
                         }
                         else if(storeResponse['nextJanitors'].length === 1 && storeResponse['janitors'].length === 2){
                             storeResponse['nextJanitors'].push(storeResponse['janitors'][0])
+                            janitor1 = storeResponse['nextJanitors'][0]['Slack Id']; janitor2 = storeResponse['nextJanitors'][1]['Slack Id']
                         }
                         if(storeResponse['janitors'].length === 0 && storeResponse['storeJanitors'].length !== 0){
                             //will check the value of the janitors and the length of the storeJanitors
                             storeResponse['nextJanitors'] = storeResponse['storeJanitors']
+                            janitor1 = storeResponse['nextJanitors'][0]['Slack Id']; janitor2 = storeResponse['nextJanitors'][1]['Slack Id']
                         }
+                        else{
+                            janitor1 = storeResponse['janitors'][0]['Slack Id']; janitor2 = storeResponse['janitors'][1]['Slack Id']
+                        }
+                        //Add the Phrase that will be sended to Slack
+                        const emojiList = [":sparkles:", ":boom:", ":muscle:", ":trophy:", ":rocket:", ":hotsprings:"]
+                        const phrases = [
+                            `Bom dia! Hoje <@${janitor1}> e <@${janitor2}> estarão auxiliando na organização do nosso ambiente de trabalho.`,
+                            `Bahhhh gurizada, hoje os Zelas são os <@${janitor1}> <@${janitor2}> dos meu. Eles que vão dar uma girica na cozinha neh!`,
+                            `E ai camaradinhas, os zeladores de hoje são <@${janitor1}> e <@${janitor2}>. Vamo dalhe!`,
+                            `Galera, a copa está aos cuidados de <@${janitor1}> e <@${janitor2}> hoje.`
+                        ]
+                        storeResponse['phrase'] = `${emojiList[Math.floor((Math.random()* emojiList.length))]} ${phrases[Math.floor((Math.random()* phrases.length))]} ${emojiList[Math.floor((Math.random()* emojiList.length))]}`
+                        if(storeResponse['birthdays'].length === 1){
+                            storeResponse['birthdays'] = `Temos um aniversariante hoje. Parabéns :tada: <@${params['birthdays'][0]['Slack Id']}> :tada:`
+                        }
+                        if(storeResponse['birthdays'].length > 1){
+                            let birthdayPrhase = 'Hoje é um dia muito especial para: '
+                            for(let i = 0; i < storeResponse['birthdays'].length; i++){
+                                if(i === storeResponse['birthdays'].length - 1){
+                                    birthdayPrhase = birthdayPrhase + ` e :tada: <@${storeResponse['birthdays'][i]['Slack Id']}> :tada:`
+                                }
+                                else{
+                                    birthdayPrhase = birthdayPrhase + `:tada: <@${storeResponse['birthdays'][i]['Slack Id']}> :tada:`
+                                }
+                            }
+                            storeResponse['birthdays'] = birthdayPrhase
+                        }
+                        //Method to set random messages
+                        // let janitorPhrases = {
+                        //     'portuguese': [],
+                        //     'english': [],
+                        //     'spanish': [],
+                        //     'german': []
+                        // }
+                        // let birthdaysPhrases = {
+                        //     'portuguese': [],
+                        //     'english': [],
+                        //     'spanish': [],
+                        //     'german': []
+                        // }
+                        // function RandomPhrase(janitor, birthday){//Function to set an aleatory phrase
+                        //     const randomLanguage = Object.keys(janitor)[Math.floor(Math.random() * Object.keys(janitor).length)] 
+                        //     currentJanitorPhrase = janitor[randomLanguage][Math.floor(Math.random() * janitor[randomLanguage].length)]
+                        //     if(params['birthdays'].length !== 0){
+                        //         currentBirthdayPhrase = birthday[randomLanguage][Math.floor(Math.random() * birthday[randomLanguage].length)]
+                        //     }
+                        // }
+                        // RandomPhrase(janitorPhrases, birthdaysPhrases)
                         delete storeResponse['storeJanitors']
                         resolve(storeResponse)
                     }
