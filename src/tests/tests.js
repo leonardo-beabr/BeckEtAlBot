@@ -56,3 +56,46 @@ RandomPhrase(janitorPhrases, birthdaysPhrases)
 // ]
 // message = `${emojiList[Math.floor((Math.random()* emojiList.length))]} ${phrases[Math.floor((Math.random()* phrases.length))]} ${emojiList[Math.floor((Math.random()* emojiList.length))]}`
 // console.log(message)
+
+//Random Airtable message
+// var Airtable = require('airtable');
+// require('dotenv').config()
+// Airtable.configure({
+//     endpointUrl: 'https://api.airtable.com',
+//     apiKey: ''
+// });
+// const base = Airtable.base(''); //ID of the base
+// const bases = ['Office Duties', 'Birthday', 'Users Id', 'Date Backup', 'Phrases']
+// let store = []
+// async function DemoTable(){
+//     for await (const currentBase of bases){
+//         const table = base(currentBase)
+//         table.select({
+//             'view': 'Grid view'
+//         }).eachPage(function page(records, fetchNextPage){
+//             records.forEach(function(record){
+//                 if (currentBase === 'Phrases'){
+//                     const janitor1 = "John", janitor2 = "Jane"
+//                     let phrase = record.get('Phrase').toString()
+//                     var n = phrase.search('janitor1')
+//                     if(n !== -1 ){
+//                         console.log(phrase[n])
+//                         phrase[n] = janitor1
+//                     }
+//                     console.log(phrase)                   
+//                     // // const teste = `Bahhhh gurizada, hoje os Zelas são os ${janitor1} ${janitor2} dos meu. Eles que vão dar uma girica na cozinha neh!`
+//                     // phrase = '`'+phrase+'`'
+//                     // console.log(phrase)
+//                     // // console.log(teste)
+//                 }
+//             })
+//             fetchNextPage()
+//         }, function done(err){
+//             if(err){console.log(err);return}
+//             console.log('Done')
+//             // console.log(store[0][0])
+//         })
+//     }
+// }
+// DemoTable()
+// // console.log(store[0])
