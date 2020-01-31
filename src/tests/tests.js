@@ -99,3 +99,48 @@ RandomPhrase(janitorPhrases, birthdaysPhrases)
 // }
 // DemoTable()
 // // console.log(store[0])
+//Weather
+// const request = require('request')
+// let apiKey = '9dbec8d704cd29d4a67e902169201db2'
+// let city = 'florianopolis';
+// let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${apiKey}`
+// request(url, function (error, response, body) {
+//     if(error){
+//       console.log('error:', error);
+//     } else {
+//       let weather = JSON.parse(body)
+//       console.log(weather)
+//     //   let message = `It's ${weather.main.temp} degrees in ${weather.name}!`;
+//     //   console.log(message);
+//     }
+//   });
+// // weather()
+// var weather = require('weather-js');
+ 
+// Options:
+// search:     location name or zipcode
+// degreeType: F or C
+ 
+// weather.find({search: '88075-120, SC', degreeType: 'C'}, function(err, result) {
+//     if(err) console.log(err);
+//     console.log(JSON.stringify(result, null, 2));
+//     const phrase = `A temperatura atual em ${result[0]['location']['name']} é de ${result[0]['current']['temperature']} com máxima de ${result[0]['forecast'][1]['high']} e mínima de ${result[0]['forecast'][1]['low']}`
+//     const weatherInfo = {
+//         'location': result[0]['location']['name'],
+//         'today': {
+//             'temperature' : result[0]['current']['temperature'],
+//             'skytext' : result[0]['current']['skytext'],
+//             'humidity': result[0]['current']['humidity'],
+//             'winddisplay': result[0]['current']['winddisplay'],
+//             'high': result[0]['forecast'][1]['high'],
+//             'low': result[0]['forecast'][1]['low']
+//         },
+//         'tomorrow':{
+//             'skytext' : result[0]['forecast'][2]['skytextday'],
+//             'high': result[0]['forecast'][2]['high'],
+//             'low': result[0]['forecast'][2]['low']
+//         },
+//         'phrase': phrase
+//     }
+//     console.log(weatherInfo)
+// });
