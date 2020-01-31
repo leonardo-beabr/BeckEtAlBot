@@ -7,15 +7,7 @@ const bot = new SlackBot({
 }); 
 var slackParams = {
     'icon_emoji': ':robot_face:',
-    // 'blocks': [
-    //     {
-    //         'type':'section',
-    //         'text': {
-    //             'type':'mrkdwn',
-    //             'text': ptMessage
-    //         }
-    //     }
-    // ]
+    'blocks': []
 };
 module.exports = {
     /*
@@ -36,5 +28,36 @@ module.exports = {
     ErrorNotify(error){
         console.log(error)
         bot.postMessage('DSH3K8AF3', `Error: ${error}`, slackParams);
+    },
+    SlackMessages(req, res){
+        if(req['params']['path'] === 'info'){
+            res.send('infoRoute')
+        }
+        if(req['params']['path'] === 'message'){
+            if(!req['body']['channel']){
+                res.send("channel id is required")
+            }
+            else{
+                let channel = req['body']['channel'];
+                let message = req['body']['message'];
+                slackParams['blocks'].push({
+                    'type':'section',
+                    'text': {
+                        'type':'mrkdwn',
+                        'text': message
+                    }
+                })
+                if(req['body']['blocks']){
+                    for(let i = 0; i < req['body']['blocks'].length;i++){
+                        slackParams['blocks'].push(req['body']['blocks'][i])
+                    }
+                }
+                bot.postMessage(channel, '', slackParams)
+                res.send('Message Sended')
+            }
+        }
+        else{
+            res.send("Not found")
+        }
     }
 }

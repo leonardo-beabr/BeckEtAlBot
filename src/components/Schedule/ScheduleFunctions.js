@@ -7,7 +7,7 @@ module.exports = {
     //This function will be executed every day at 8:00 AM at Mondays and Thursdays
     EveryDayFunction(){
         console.log('EveryDayFunction')
-        cron.schedule("* * * * *", () => { //Maybe this condition will be used "10 8 * * 1,4"
+        cron.schedule("10 8 * * 1,4", () => { //Maybe this condition will be used "10 8 * * 1,4"
             const date = new Date()
             //Get the day of the Monday of the week
             let startAt = new Date(`${date.getMonth() + 1 }/${date.getDate() - date.getDay() + 1}/${date.getFullYear()}`); //Will get the Monday
@@ -48,9 +48,5 @@ module.exports = {
             scheduled: true,
             timezone: "America/Sao_Paulo" //Uses a custom time zone
         })
-    },
-    SlackMessages(req, res){
-        console.log(res)
-        console.log(req)
     }
 }
