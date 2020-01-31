@@ -86,22 +86,24 @@ module.exports = {
                         const phrases = [
                             `Bom dia! Hoje <@${janitor1}> e <@${janitor2}> estarão auxiliando na organização do nosso ambiente de trabalho.`,
                             `Bahhhh gurizada, hoje os Zelas são os <@${janitor1}> <@${janitor2}> dos meu. Eles que vão dar uma girica na cozinha neh!`,
-                            `E ai camaradinhas, os zeladores de hoje são <@${janitor1}> e <@${janitor2}>. Vamo dalhe!`
+                            `E ai camaradinhas, os zeladores de hoje são <@${janitor1}> e <@${janitor2}>. Vamo dalhe!`,
+                            `Galera, a copa está aos cuidados de <@${janitor1}> e <@${janitor2}> hoje.`
                         ]
                         storeResponse['phrase'] = `${emojiList[Math.floor((Math.random()* emojiList.length))]} ${phrases[Math.floor((Math.random()* phrases.length))]} ${emojiList[Math.floor((Math.random()* emojiList.length))]}`
                         if(storeResponse['birthdays'].length === 1){
-                            slackMessage = slackMessage  + `Temos um aniversariante hoje. Parabéns :tada: <@${params['birthdays'][0]['Slack Id']}> :tada:`
+                            storeResponse['birthdays'] = `Temos um aniversariante hoje. Parabéns :tada: <@${params['birthdays'][0]['Slack Id']}> :tada:`
                         }
                         if(storeResponse['birthdays'].length > 1){
-                            storeResponse['phrase'] = storeResponse['phrase'] + ' Hoje é um dia muito especial para: '
+                            let birthdayPrhase = 'Hoje é um dia muito especial para: '
                             for(let i = 0; i < storeResponse['birthdays'].length; i++){
                                 if(i === storeResponse['birthdays'].length - 1){
-                                    storeResponse['phrase'] = storeResponse['phrase'] + ` e :tada: <@${storeResponse['birthdays'][i]['Slack Id']}> :tada:`
+                                    birthdayPrhase = birthdayPrhase + ` e :tada: <@${storeResponse['birthdays'][i]['Slack Id']}> :tada:`
                                 }
                                 else{
-                                    storeResponse['phrase'] = storeResponse['phrase'] + `:tada: <@${storeResponse['birthdays'][i]['Slack Id']}> :tada:`
+                                    birthdayPrhase = birthdayPrhase + `:tada: <@${storeResponse['birthdays'][i]['Slack Id']}> :tada:`
                                 }
                             }
+                            storeResponse['birthdays'] = birthdayPrhase
                         }
                         //Method to set random messages
                         // let janitorPhrases = {
@@ -125,7 +127,6 @@ module.exports = {
                         // }
                         // RandomPhrase(janitorPhrases, birthdaysPhrases)
                         delete storeResponse['storeJanitors']
-                        delete storeResponse['birthdays']
                         resolve(storeResponse)
                     }
                 })

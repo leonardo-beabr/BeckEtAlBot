@@ -5,7 +5,7 @@ const bot = new SlackBot({
     token: process.env.BOT_TOKEN, // Add a bot https://my.slack.com/services/new/bot and put the token 
     name: process.env.BOT_NAME
 }); 
-var slackParams = {
+let slackParams = {
     'icon_emoji': ':robot_face:',
     'blocks': []
 };
@@ -19,11 +19,36 @@ module.exports = {
         Add auto data select when the all janitors teams gone
         To mention an user => <@User_Id>
     */
-    EverydayNotify(params = {'slackMessage': {'text': String, 'blocks': Array}}){
-        console.log(params)
-        // console.log(slackMessage)
-        // bot.postMessage('DSH3K8AF3', ptMessage[0], slackParams);
-        bot.postMessage(process.env.CHANNEL, params['slackMessage']['text'], slackParams)
+    EverydayNotify(params = {'janitors': "", 'birthdays': "", 'weather': ""}){
+        // console.log(params)
+        slackParams['blocks'] = [
+            {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": params['weather']['phrase']
+                }
+            },
+            {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": params['janitors']
+                }
+            }
+        ]
+        if(params['birthdays'].length !== 0){
+            slackParams['blocks'].push({
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": "This is a mrkdwn section block :ghost: *this is bold*, and ~this is crossed out~, and <https://google.com|this is a link>"
+                }
+            })
+        }
+        // console.log(JSON.stringify(slackParams, null, 2))
+        // bot.postMessage('DSH3K8AF3', '', slackParams);
+        bot.postMessage(process.env.CHANNEL, '', slackParams)
     },
     ErrorNotify(error){
         console.log(error)

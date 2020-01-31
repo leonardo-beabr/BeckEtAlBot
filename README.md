@@ -5,6 +5,7 @@
     <li>Send messages in a slack channel as an Bot;</li>
     <li>Generate new janitors date;</li>
     <li>Scheduled functions for specific days and times of day;</li>
+    <li>Get the current Weather with a ZIP code;</li>
 </ul>
 
 <h3>Todo</h3>
@@ -12,6 +13,7 @@
     <li>Add interactions</li>
     <li>Add a NLP provier (Assisant, Power Agents, Dialogflow)</li>
     <li>Remove, add and change users of a base</li>
+    <li>Separate the Schedule Functions. One for current weather and birthdays and another for the janitors. Or all together</li>
 </ul>
 
 <h3>Setting up</h3>
