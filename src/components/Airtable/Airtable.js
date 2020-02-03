@@ -8,7 +8,7 @@ const base = Airtable.base(process.env.AIRTABLE_BASE); //ID of the base
 const bases = ['Office Duties', 'Birthday', 'Users Id', 'Date Backup']
 module.exports = {
     ReadOfficeTable(dayStart, currentDay, dayEnd){
-        var storeResponse = {'janitors': [], 'birthdays': [], 'nextJanitors': [], 'storeJanitors':[], 'phrase' : ``}
+        let storeResponse = {'janitors': [], 'birthdays': [], 'nextJanitors': [], 'storeJanitors':[], 'phrase' : ``, 'birthdayPhrase' : ``}
         //Async function that returns a array
         return new Promise(async function(resolve, reject){
             let counter = 0, ableStore = 0;
@@ -60,7 +60,6 @@ module.exports = {
                     // console.log(counter, bases.length)
                     if(counter === bases.length){
                         let janitor1 = '', janitor2 = '' //will set the two janitors
-                        // console.log(storeResponse)
                         if(storeResponse['nextJanitors'].length === 0){//will check if have any item in the array.
                             if(currentDay === dayEnd){//if the current day is the same of dayEnd the variable will set the value of the first two itens of the base
                                 storeResponse['nextJanitors'] = storeResponse['storeJanitors']
@@ -91,19 +90,23 @@ module.exports = {
                         ]
                         storeResponse['phrase'] = `${emojiList[Math.floor((Math.random()* emojiList.length))]} ${phrases[Math.floor((Math.random()* phrases.length))]} ${emojiList[Math.floor((Math.random()* emojiList.length))]}`
                         if(storeResponse['birthdays'].length === 1){
-                            storeResponse['birthdays'] = `Temos um aniversariante hoje. Parabéns :tada: <@${params['birthdays'][0]['Slack Id']}> :tada:`
+                            const birthdayPhrases = [
+                                `Temos um aniversariante hoje. Parabéns :tada: <@${storeResponse['birthdays'][0]['Slack Id']}> :tada:.`,
+                                `Hoje é um dia muito especial para o :tada: <@${storeResponse['birthdays'][0]['Slack Id']}> :tada:.`,
+                                `Parabéns <@${storeResponse['birthdays'][0]['Slack Id']}> :tada: :gift:.`
+                            ]
+                            storeResponse['birthdayPhrase'] = birthdayPhrases[Math.floor(Math.random() * birthdayPhrases.length)]
                         }
                         if(storeResponse['birthdays'].length > 1){
-                            let birthdayPrhase = 'Hoje é um dia muito especial para: '
+                            storeResponse['birthdayPhrase'] = 'Hoje é um dia muito especial para: '
                             for(let i = 0; i < storeResponse['birthdays'].length; i++){
                                 if(i === storeResponse['birthdays'].length - 1){
-                                    birthdayPrhase = birthdayPrhase + ` e :tada: <@${storeResponse['birthdays'][i]['Slack Id']}> :tada:`
+                                    storeResponse['birthdayPhrase'] = storeResponse['birthdayPhrase'] + ` e :tada: <@${storeResponse['birthdays'][i]['Slack Id']}> :tada:`
                                 }
                                 else{
-                                    birthdayPrhase = birthdayPrhase + `:tada: <@${storeResponse['birthdays'][i]['Slack Id']}> :tada:`
+                                    storeResponse['birthdayPhrase'] = storeResponse['birthdayPhrase'] + `:tada: <@${storeResponse['birthdays'][i]['Slack Id']}> :tada:`
                                 }
                             }
-                            storeResponse['birthdays'] = birthdayPrhase
                         }
                         //Method to set random messages
                         // let janitorPhrases = {
@@ -126,7 +129,9 @@ module.exports = {
                         //     }
                         // }
                         // RandomPhrase(janitorPhrases, birthdaysPhrases)
+                        console.log(storeResponse)
                         delete storeResponse['storeJanitors']
+                        delete storeResponse['birthdays']
                         resolve(storeResponse)
                     }
                 })

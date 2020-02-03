@@ -42,7 +42,7 @@ module.exports = {
                         Slack.ErrorNotify(error)
                     })
                 }
-                Slack.EverydayNotify({'janitors': response['phrase'], 'birthdays': response['birthdays'], 'weather': getWeather})
+                Slack.EverydayNotify({'janitors': response['phrase'], 'birthdays': response['birthdayPhrase'], 'weather': getWeather})
             })
             .catch(error =>{
                 Slack.ErrorNotify(error)
