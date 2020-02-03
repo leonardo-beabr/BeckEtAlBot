@@ -29,26 +29,26 @@ module.exports = {
                     "text": params['weather']['phrase']
                 }
             },
-            {
-                "type": "section",
-                "text": {
-                    "type": "mrkdwn",
-                    "text": params['janitors']
-                }
-            }
+            // {
+            //     "type": "section",
+            //     "text": {
+            //         "type": "mrkdwn",
+            //         "text": params['janitors']
+            //     }
+            // }
         ]
-        if(params['birthdays'].length !== 0){
-            slackParams['blocks'].push({
-                "type": "section",
-                "text": {
-                    "type": "mrkdwn",
-                    "text": params['birthdays']
-                }
-            })
-        }
+        // if(params['birthdays'].length !== 0){
+        //     slackParams['blocks'].push({
+        //         "type": "section",
+        //         "text": {
+        //             "type": "mrkdwn",
+        //             "text": params['birthdays']
+        //         }
+        //     })
+        // }
         // console.log(JSON.stringify(slackParams, null, 2))
-        // bot.postMessage('DSH3K8AF3', '', slackParams);
-        bot.postMessage(process.env.CHANNEL, '', slackParams)
+        bot.postMessage('DSH3K8AF3', '', slackParams);
+        // bot.postMessage(process.env.CHANNEL, '', slackParams)
     },
     ErrorNotify(error){
         console.log(error)

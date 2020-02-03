@@ -6,6 +6,11 @@
     <li>Generate new janitors date;</li>
     <li>Scheduled functions for specific days and times of day;</li>
     <li>Get the current Weather with a ZIP code;</li>
+    <li>AWS</li>
+    <ul>
+    <li>Serverless integrations to use Lambda Functions</li>
+    <li>CloudWatch Events</li>
+    </ul>
 </ul>
 
 <h3>Todo</h3>
