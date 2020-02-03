@@ -86,7 +86,8 @@ module.exports = {
                             `Bom dia! Hoje <@${janitor1}> e <@${janitor2}> estarão auxiliando na organização do nosso ambiente de trabalho.`,
                             `Bahhhh gurizada, hoje os Zelas são os <@${janitor1}> <@${janitor2}> dos meu. Eles que vão dar uma girica na cozinha neh!`,
                             `E ai camaradinhas, os zeladores de hoje são <@${janitor1}> e <@${janitor2}>. Vamo dalhe!`,
-                            `Galera, a copa está aos cuidados de <@${janitor1}> e <@${janitor2}> hoje.`
+                            `Galera, a copa está aos cuidados de <@${janitor1}> e <@${janitor2}> hoje.`,
+                            `Fala gurizes! Hoje quem manda na cozinha é o <@${janitor1}> e <@${janitor2}>.`
                         ]
                         storeResponse['phrase'] = `${emojiList[Math.floor((Math.random()* emojiList.length))]} ${phrases[Math.floor((Math.random()* phrases.length))]} ${emojiList[Math.floor((Math.random()* emojiList.length))]}`
                         if(storeResponse['birthdays'].length === 1){
