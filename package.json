@@ -10,7 +10,7 @@
     "predeploy": "rm -rf node_modules && npm install --platform=linux --arch=x64",
     "deploy": "serverless deploy -v",
     "postdeploy": "rm -rf node_modules && npm install",
-    "git": "python3 src/scripts/github.py"
+    "github": "python3 src/scripts/github.py"
   },
   "keywords": [],
   "author": "",
