@@ -19,6 +19,8 @@
     <li>Add a NLP provier (Assisant, Power Agents, Dialogflow)</li>
     <li>Remove, add and change users of a base</li>
     <li>Separate the Schedule Functions. One for current weather and birthdays and another for the janitors. Or all together</li>
+    <li>Local news</li>
+    <li>Random messages structure</li>
 </ul>
 
 <h3>Setting up</h3>
@@ -32,7 +34,8 @@
         <li>Turn on the Enable Events and add a bot user in Subscribe to bot events, turn on the Always Show My Bot as Online;</li>
         <li>Go back to Subscribe to bot events and select "Add Bot User Event", select "app_mention" and "messages.im";</li>
         <li>Install the App in your workspace;</li>
-        <li>Copy the "Bot User OAuth Access Token" and paste in BOT_TOKEN of .env file;</li>
+        <li>Copy the "Bot User OAuth Access Token"</li> 
+        <li>Change the .env_sample file to .env and paste in BOT_TOKEN of .env file;</li>
         <li>Add a name in the BOT_NAME in .env file.</li>
     </ul>
 </ul>
@@ -48,6 +51,16 @@
     <li>Check the sample of the base <a href="https://airtable.com/invite/l?inviteId=invSBH17Cr8bRJifH&inviteToken=30b3e74bb212cd8c6f4245549c0928167758ca01f32b55769fdc0d275154e45d" target="_blank">here</a>;</li>
 </ul>
 
+<p>Serverless</p>
+<ul>
+    <li>Create an account in the AWS</li>
+    <li>Create a IAM user and copy the key and secret ids</li>
+    <li>Install the serverless</li>
+    <li>run the command: serverless config credentials -o --provider aws --key {your_key_id} --secret {your_secret_id}
+    </li>
+    <li>Than run the command yarn deploy or npm run deploy</li>
+</ul>
+
 <h3>Scripts</h3>
 
 <p>Run with nodemon</p>
@@ -55,9 +68,43 @@
 ```
 yarn dev
 ```
+or
+```
+npm run dev
+```
 
-<p>Run in production</p>
+<p>Deploy to AWS</p>
 
 ```
-yarn start
+yarn deploy
+```
+or
+```
+npm run deploy
+```
+
+<p>Deploy to AWS</p>
+
+```
+yarn deploy
+```
+or
+```
+npm run deploy
+```
+
+<p>Deploy to AWS</p>
+
+```
+yarn deploy
+```
+or
+```
+npm run deploy
+```
+
+<p>Invoke function</p>
+
+```
+serverless invoke -f everyday -l
 ```

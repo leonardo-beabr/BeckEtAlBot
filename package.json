@@ -9,8 +9,7 @@
     "start": "node src/index.js",
     "predeploy": "rm -rf node_modules && npm install --platform=linux --arch=x64",
     "deploy": "serverless deploy -v",
-    "postdeploy": "rm -rf node_modules && npm install",
-    "github": "python3 src/scripts/github.py"
+    "postdeploy": "rm -rf node_modules && npm install"
   },
   "keywords": [],
   "author": "",

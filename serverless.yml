@@ -73,7 +73,7 @@ functions:
     - schedule:
         name: BeaBrBot-SlackNotifications
         description: This event will run a Lambda Function that send messages in a Slack channel
-        rate: cron(30 11 ? * 1-5 *) #The time that needed to be trigger is 8:30 a.m
+        rate: cron(30 11 ? * 2,5 *) #The time that needed to be trigger is 8:30 a.m
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
