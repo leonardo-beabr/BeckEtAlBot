@@ -101,8 +101,8 @@ RandomPhrase(janitorPhrases, birthdaysPhrases)
 // // console.log(store[0])
 //Weather
 // const request = require('request')
-// let apiKey = '9dbec8d704cd29d4a67e902169201db2'
-// let city = 'florianopolis';
+// let apiKey = ''
+// let city = '';
 // let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${apiKey}`
 // request(url, function (error, response, body) {
 //     if(error){
@@ -121,7 +121,7 @@ RandomPhrase(janitorPhrases, birthdaysPhrases)
 // search:     location name or zipcode
 // degreeType: F or C
  
-// weather.find({search: '88075-120, SC', degreeType: 'C'}, function(err, result) {
+// weather.find({search: '', degreeType: 'C'}, function(err, result) {
 //     if(err) console.log(err);
 //     console.log(JSON.stringify(result, null, 2));
 //     const phrase = `A temperatura atual em ${result[0]['location']['name']} é de ${result[0]['current']['temperature']} com máxima de ${result[0]['forecast'][1]['high']} e mínima de ${result[0]['forecast'][1]['low']}`
