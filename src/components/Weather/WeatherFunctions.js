@@ -9,6 +9,9 @@ module.exports = {
                     if(result[0]['current']['skytext'] === 'Light Rain'){
                         phrase = phrase + ` Hoje o dia terá chuva de leve :cloud: :umbrella:.`
                     }
+                    if(result[0]['current']['skytext'] === 'Rain Showers'){
+                        phrase = phrase + ` Hoje o dia será chuvoso :cloud: :umbrella:.`
+                    }
                     if(result[0]['current']['skytext'] === 'T-Storms'){
                         phrase = phrase + ` Teremos chuvas com trovoadas :cloud: :zap:.`
                     }

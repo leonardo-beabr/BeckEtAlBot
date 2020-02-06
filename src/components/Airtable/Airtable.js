@@ -130,7 +130,7 @@ module.exports = {
                         //     }
                         // }
                         // RandomPhrase(janitorPhrases, birthdaysPhrases)
-                        console.log(storeResponse)
+                        // console.log(storeResponse)
                         delete storeResponse['storeJanitors']
                         delete storeResponse['birthdays']
                         resolve(storeResponse)

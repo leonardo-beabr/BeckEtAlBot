@@ -46,7 +46,7 @@ module.exports = {
                 }
             })
         }
-        // console.log(JSON.stringify(slackParams, null, 2))
+        // console.log(slackParams)
         // bot.postMessage('DSH3K8AF3', '', slackParams);
         bot.postMessage(process.env.CHANNEL, '', slackParams)
     },
